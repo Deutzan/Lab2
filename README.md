@@ -1,4 +1,4 @@
-<h1 align="center">🏎️ Torq Rent 🔑</h1>
+<h1 align="center"> Torq Rent </h1>
  
 <p align="center">
   <img src="docs/logo.svg" alt="Logo da Torq Rent: escudo hexagonal com duas lâminas inclinadas em teal e vermelho" width="140">
@@ -18,7 +18,6 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)
 ![JSON Server](https://img.shields.io/badge/JSON%20Server-0.17.4-000000?logo=json&logoColor=white)
-![Licença](https://img.shields.io/badge/Licen%C3%A7a-MIT-green)
  
 **Situação:** protótipo funcional (laboratório de Desenvolvimento de Interfaces Web). Cobre cadastro, CRUD de cliente e o ciclo completo do pedido de aluguel.
  
@@ -32,7 +31,7 @@
 - [Arquitetura](#-arquitetura)
 - [Modelos vs. Código](#-modelos-vs-código)
 - [Documentações utilizadas](#-documentações-utilizadas)
-- [Autores](#-autores)
+- [Autor](#-autor)
 
 ---
  
