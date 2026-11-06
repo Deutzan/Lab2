@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Torq Rent — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== TOKENS ===== */
+:root,[data-theme="light"]{
+  --bg:#E8E8E8; --bg-soft:#DCDCDE; --surface:#F6F6F7; --ink:#2A2630; --muted:#534D56; --line:#C4C2C9;
+  --accent:#0F6F64; --accent-ink:#fff; --accent-text:#0F6F64; --alert:#DF2935; --alert-ink:#fff;
+  --shadow:0 10px 30px -12px rgba(42,38,48,.35); color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#17151A; --bg-soft:#221F26; --surface:#2B2730; --ink:#E8E8E8; --muted:#B9B5C2; --line:#4A4552;
+    --accent:#1B998B; --accent-ink:#17151A; --accent-text:#3FC7B8; --alert:#EE4A55; --alert-ink:#17151A;
+    --shadow:0 10px 30px -12px rgba(0,0,0,.7); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"],[data-theme="dark"]{
+  --bg:#17151A; --bg-soft:#221F26; --surface:#2B2730; --ink:#E8E8E8; --muted:#B9B5C2; --line:#4A4552;
+  --accent:#1B998B; --accent-ink:#17151A; --accent-text:#3FC7B8; --alert:#EE4A55; --alert-ink:#17151A;
+  --shadow:0 10px 30px -12px rgba(0,0,0,.7); color-scheme:dark;
+}
+:root{
+  --font-display:"Outfit",system-ui,sans-serif; --font-body:"Plus Jakarta Sans",system-ui,sans-serif;
+  --r-sm:4px; --r-md:8px; --r-lg:14px; --r-pill:999px;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.6 var(--font-body);transition:background .35s,color .35s}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.02em}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--s5)}
+section{padding:var(--s9) 0 0}
+.lead{color:var(--muted);max-width:62ch;margin-top:var(--s3)}
+.sec-head{margin-bottom:var(--s6)}
+.sec-head h2{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;line-height:1.1;font-style:italic}
+:focus-visible{outline:3px solid var(--accent-text);outline-offset:3px;border-radius:var(--r-sm)}
+
+/* ===== NAVBAR ===== */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:var(--s5);height:68px;padding:0 var(--s5);max-width:1120px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:var(--s2);text-decoration:none;color:var(--ink)}
+.brand svg{width:34px;height:34px}
+.word{font:800 1.35rem/1 var(--font-display);font-style:italic;letter-spacing:.02em}
+.word b{color:var(--accent-text);font-weight:800}
+.links{display:flex;gap:var(--s5);margin-left:auto}
+.links a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.9rem}
+.links a:hover{color:var(--ink)}
+.toggle{display:inline-flex;align-items:center;gap:var(--s2);border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:var(--r-pill);padding:4px 12px 4px 4px;font:600 .8rem var(--font-body);cursor:pointer}
+.toggle .knob{width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;transition:transform .3s cubic-bezier(.3,1.4,.5,1)}
+.toggle svg{width:16px;height:16px}
+.toggle .moon{display:none}
+[data-theme="dark"] .toggle .sun{display:none}[data-theme="dark"] .toggle .moon{display:block}
+[data-theme="dark"] .toggle .knob{transform:rotate(360deg)}
+.toggle:not(.static){margin-left:0}
+.back{color:var(--ink);font-weight:600;font-size:.88rem;text-decoration:none;border:2px solid var(--ink);border-radius:var(--r-md);padding:6px 12px;white-space:nowrap}
+.back:hover{background:var(--ink);color:var(--bg)}
+
+/* ===== BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);min-height:44px;padding:0 var(--s5);border:2px solid transparent;border-radius:var(--r-md);font:700 .95rem var(--font-display);letter-spacing:.01em;cursor:pointer;text-decoration:none;transform:skewX(-8deg);transition:filter .2s,transform .2s}
+.btn>span{display:block;transform:skewX(8deg)}
+.btn:hover{filter:brightness(1.1);transform:skewX(-8deg) translateX(3px)}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-alert{background:var(--alert);color:var(--alert-ink)}
+.btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+
+/* ===== HERO ===== */
+.hero{padding-top:var(--s8);position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:var(--s7);align-items:center}
+.hero h1{font-size:clamp(2.6rem,7vw,5rem);font-weight:800;line-height:1;font-style:italic}
+.hero h1 em{display:block;color:var(--accent-text)}
+.hero .cta{display:flex;gap:var(--s4);flex-wrap:wrap;margin-top:var(--s6)}
+.stage{background:var(--ink);color:var(--bg);border-radius:var(--r-lg);aspect-ratio:1;display:grid;place-items:center;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.stage svg.logo{width:62%;height:auto;z-index:1}
+.speed{position:absolute;height:6px;border-radius:3px;left:-40%;width:60%;animation:rush 2.6s linear infinite}
+.speed:nth-child(1){top:22%;background:var(--accent);animation-delay:0s}
+.speed:nth-child(2){top:50%;background:var(--alert);animation-delay:.9s;width:45%}
+.speed:nth-child(3){top:78%;background:var(--bg);opacity:.5;animation-delay:1.6s;width:35%}
+@keyframes rush{to{transform:translateX(330%)}}
+@media (prefers-reduced-motion:reduce){.speed{animation:none;left:10%}.btn,.toggle .knob{transition:none}}
+
+/* ===== PANELS ===== */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s6)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--s5)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s5)}
+.grid2>*,.grid3>*{min-width:0}
+.logo-row{display:flex;gap:var(--s5);flex-wrap:wrap;align-items:center}
+.lbox{flex:1 1 200px;border-radius:var(--r-md);padding:var(--s5);display:flex;align-items:center;justify-content:center;gap:var(--s3);min-height:110px}
+.lbox svg{width:48px;height:48px}
+.principles{list-style:none;margin:0;padding:0;display:grid;gap:var(--s4)}
+.principles li{border-left:6px solid var(--accent);padding-left:var(--s4)}
+.principles li:nth-child(2){border-color:var(--alert)}.principles li:nth-child(3){border-color:var(--muted)}
+.principles b{font-family:var(--font-display);display:block}
+.principles span{color:var(--muted);font-size:.92rem}
+
+/* ===== COLORS ===== */
+.sw{border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.sw i{display:block;height:84px}
+.sw div{padding:var(--s3) var(--s4)}
+.sw b{display:block;font-family:var(--font-display)}
+.sw code,.tok{font:500 .78rem ui-monospace,Menlo,monospace;color:var(--muted)}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--s4)}
+.pairs{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s5)}
+.pair{padding:var(--s2) var(--s4);border-radius:var(--r-md);font-weight:600;font-size:.88rem}
+h3.sub{font-size:1.15rem;font-weight:700;margin:var(--s6) 0 var(--s4)}
+
+/* ===== TYPE ===== */
+.trow{display:grid;grid-template-columns:150px 1fr;gap:var(--s5);padding:var(--s4) 0;border-top:1px solid var(--line);align-items:baseline}
+.trow .tok{line-height:1.5}
+.t-h1{font:800 3rem/1.05 var(--font-display);letter-spacing:-.03em;font-style:italic}
+.t-h2{font:800 2.25rem/1.1 var(--font-display);letter-spacing:-.02em;font-style:italic}
+.t-h3{font:700 1.5rem/1.2 var(--font-display)}
+.t-sub{font:500 1.25rem/1.4 var(--font-body);color:var(--muted)}
+.t-eye{font:600 .8rem/1.2 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text)}
+.t-hl{font:700 1.125rem/1.4 var(--font-display);color:var(--accent-text)}
+.t-body{font:400 1rem/1.6 var(--font-body)}
+.t-cap{font:400 .8125rem/1.4 var(--font-body);color:var(--muted)}
+
+/* ===== TOKENS UI ===== */
+.rad{display:flex;gap:var(--s4);flex-wrap:wrap}
+.rad div{width:96px;height:72px;border:3px solid var(--accent-text);display:grid;place-items:center;font-size:.78rem;font-weight:600}
+.sp{display:grid;gap:var(--s2)}
+.sp div{display:flex;align-items:center;gap:var(--s3)}
+.sp i{display:block;height:14px;background:var(--accent);border-radius:2px}
+.sp span{width:90px}
+.bp{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4)}
+.bp div{border:1px solid var(--line);border-radius:var(--r-md);padding:var(--s4);background:var(--bg-soft)}
+.bp b{font-family:var(--font-display);display:block}
+
+/* ===== COMPONENTS ===== */
+.car{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column}
+.car .pic{height:130px;background:var(--ink);display:grid;place-items:center;position:relative}
+.car .pic svg{width:70%}
+.badge{position:absolute;top:var(--s3);left:var(--s3);background:var(--alert);color:var(--alert-ink);font:700 .75rem var(--font-display);padding:3px 10px;border-radius:var(--r-sm);transform:skewX(-8deg)}
+.car .body{padding:var(--s4) var(--s5) var(--s5);display:grid;gap:var(--s2)}
+.price{font:800 1.5rem var(--font-display)}.price small{font:400 .8rem var(--font-body);color:var(--muted)}
+label{font-weight:600;font-size:.88rem;display:block;margin-bottom:var(--s1)}
+input,select{width:100%;min-height:44px;border-radius:var(--r-md);border:2px solid var(--line);background:var(--bg);color:var(--ink);padding:0 var(--s3);font:inherit}
+input[type=range]{padding:0;accent-color:var(--accent-text)}
+.total{font:800 2rem var(--font-display);color:var(--accent-text)}
+
+/* ===== NAV COMPARE ===== */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:var(--s5)}
+.mini{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:var(--bg);color:var(--ink)}
+.mini .bar{display:flex;align-items:center;gap:var(--s4);padding:var(--s3) var(--s4);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.mini .bar .links{gap:var(--s4)}
+.mini .bar .links a{font-size:.8rem}
+.mini .cap{padding:var(--s3) var(--s4);color:var(--muted);font-size:.8rem}
+.mini .toggle{pointer-events:none}
+.mini .toggle .knob{transition:none}
+footer{padding:var(--s9) 0 var(--s7);color:var(--muted);font-size:.85rem}
+
+@media (max-width:1023px){.grid3{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1fr}.stage{aspect-ratio:16/9}}
+@media (max-width:767px){
+  .links{display:none}.back{margin-left:auto}.nav .toggle{margin-left:0}
+  .grid2,.grid3,.cmp,.bp{grid-template-columns:1fr}
+  .trow{grid-template-columns:1fr;gap:var(--s2)}
+  .t-h1{font-size:2.25rem}.t-h2{font-size:1.75rem}
+  section{padding-top:var(--s8)}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 64 64">
+    <path d="M32 3 59 13v26L32 61 5 39V13z" fill="currentColor"/>
+    <path d="M14 21h26l7 8H21z" fill="var(--teal-mark,#1B998B)"/>
+    <path d="M21 33h26l-7 8H14z" fill="var(--red-mark,#DF2935)"/>
+    <path d="M32 3 59 13v5L32 8 5 18v-5z" fill="var(--teal-mark,#1B998B)" opacity="0"/>
+  </symbol>
+  <symbol id="carsil" viewBox="0 0 200 70">
+    <path d="M8 52c0-8 6-12 14-14l26-14c10-5 22-8 38-8h30c14 0 26 6 36 14l30 6c10 2 14 8 14 16v4h-12a16 16 0 0 0-32 0H66a16 16 0 0 0-32 0H8z" fill="#E8E8E8"/>
+    <circle cx="50" cy="54" r="11" fill="#2A2630"/><circle cx="154" cy="54" r="11" fill="#2A2630"/>
+    <path d="M70 26h30l12 12H62z" fill="#1B998B"/>
+  </symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></g></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="currentColor"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#topo" aria-label="Torq Rent">
+      <svg viewBox="0 0 64 64"><use href="#mark"/></svg>
+      <span class="word">TORQ<b>RENT</b></span>
+    </a>
+    <nav class="links" aria-label="Seções">
+      <a href="#logo">Logo</a><a href="#cores">Cores</a><a href="#tipografia">Tipografia</a><a href="#tokens">Tokens</a><a href="#componentes">Componentes</a><a href="#navbar">Navbar</a>
+    </nav>
+    <a class="back" href="index.html">Voltar ao sistema</a>
+    <button class="toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Alternar tema claro e escuro">
+      <span class="knob"><svg class="sun"><use href="#i-sun"/></svg><svg class="moon"><use href="#i-moon"/></svg></span>
+      <span id="themeLabel">Claro</span>
+    </button>
+  </div>
+</header>
+
+<main id="topo">
+<div class="wrap hero">
+  <div class="hero-grid">
+    <div>
+      <h1>Design System<em>Torq Rent</em></h1>
+      <p class="lead">Identidade, cores, tipografia e tokens para um aluguel de carros indie: sólido na estrutura, rápido no movimento. Use o botão no topo para alternar entre os temas claro e escuro.</p>
+      <div class="cta"><a class="btn btn-primary" href="#componentes"><span>Reservar agora</span></a><a class="btn btn-ghost" href="#logo"><span>Ver o logotipo</span></a></div>
+    </div>
+    <div class="stage" aria-hidden="true">
+      <div class="speed"></div><div class="speed"></div><div class="speed"></div>
+      <svg class="logo" viewBox="0 0 64 64" style="--teal-mark:#1B998B"><use href="#mark"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- LOGO -->
+<section id="logo"><div class="wrap">
+  <div class="sec-head"><h2>Logotipo: o escudo em movimento</h2>
+  <p class="lead">Um escudo hexagonal pesado, com a ponta inferior em V como uma grade frontal, segura a marca. Dentro dele, duas lâminas inclinadas para frente, uma teal e uma vermelha, cortam a forma como faróis em alta velocidade.</p></div>
+  <div class="grid2">
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0">Conceito</h3>
+      <ul class="principles">
+        <li><b>Solidez</b><span>Hexágono maciço com vértices retos, sem curvas. Transmite estrutura, blindagem e confiança na frota.</span></li>
+        <li><b>Velocidade</b><span>As lâminas seguem a inclinação de 8° usada também nos botões, a mesma assinatura em todo o sistema.</span></li>
+        <li><b>Leitura</b><span>Funciona em 16 px como favicon e em monocromia. O wordmark em itálico extra-bold reforça o avanço.</span></li>
+      </ul>
+      <p class="t-cap" style="margin-top:var(--s5)">Área de respiro: metade da altura do escudo em todos os lados. Tamanho mínimo: 24 px de altura.</p>
+    </div>
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0">Aplicações</h3>
+      <div class="logo-row">
+        <div class="lbox" style="background:#E8E8E8;color:#2A2630"><svg viewBox="0 0 64 64"><use href="#mark"/></svg><span class="word">TORQ<b style="color:#0F6F64">RENT</b></span></div>
+        <div class="lbox" style="background:#17151A;color:#E8E8E8"><svg viewBox="0 0 64 64"><use href="#mark"/></svg><span class="word">TORQ<b style="color:#3FC7B8">RENT</b></span></div>
+        <div class="lbox" style="background:#1B998B;color:#17151A;--teal-mark:#E8E8E8;--red-mark:#17151A"><svg viewBox="0 0 64 64"><use href="#mark"/></svg><span class="word">TORQ<b style="color:#17151A">RENT</b></span></div>
+        <div class="lbox" style="background:#DF2935;color:#fff;--teal-mark:#fff;--red-mark:#17151A"><svg viewBox="0 0 64 64"><use href="#mark"/></svg><span class="word">TORQRENT</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- CORES -->
+<section id="cores"><div class="wrap">
+  <div class="sec-head"><h2>Paleta e temas</h2>
+  <p class="lead">As cores originais foram mantidas como acentos. Onde o contraste exigia, criamos variações: teal mais escuro como fundo de botão no tema claro e mais luminoso como texto no escuro.</p></div>
+  <h3 class="sub" style="margin-top:0">Cores base</h3>
+  <div class="swatches">
+    <div class="sw"><i style="background:#E8E8E8"></i><div><b>Base</b><code>#E8E8E8</code></div></div>
+    <div class="sw"><i style="background:#1B998B"></i><div><b>Teal ação</b><code>#1B998B</code></div></div>
+    <div class="sw"><i style="background:#DF2935"></i><div><b>Vermelho alerta</b><code>#DF2935</code></div></div>
+    <div class="sw"><i style="background:#656176"></i><div><b>Chumbo médio</b><code>#656176</code></div></div>
+    <div class="sw"><i style="background:#534D56"></i><div><b>Chumbo escuro</b><code>#534D56</code></div></div>
+  </div>
+  <div class="grid2" style="margin-top:var(--s6)">
+    <div data-theme="light" class="panel" style="background:var(--bg);color:var(--ink)">
+      <h3 style="font-size:1.25rem;font-weight:700">Tema claro</h3>
+      <div class="swatches" style="margin-top:var(--s4);grid-template-columns:repeat(auto-fill,minmax(110px,1fr))">
+        <div class="sw"><i style="background:#E8E8E8"></i><div><b>bg</b><code>#E8E8E8</code></div></div>
+        <div class="sw"><i style="background:#F6F6F7"></i><div><b>surface</b><code>#F6F6F7</code></div></div>
+        <div class="sw"><i style="background:#2A2630"></i><div><b>ink</b><code>#2A2630</code></div></div>
+        <div class="sw"><i style="background:#534D56"></i><div><b>muted</b><code>#534D56</code></div></div>
+        <div class="sw"><i style="background:#0F6F64"></i><div><b>accent</b><code>#0F6F64</code></div></div>
+        <div class="sw"><i style="background:#DF2935"></i><div><b>alert</b><code>#DF2935</code></div></div>
+      </div>
+      <div class="pairs">
+        <span class="pair" style="background:#E8E8E8;color:#2A2630;border:1px solid #C4C2C9">Texto principal · AAA</span>
+        <span class="pair" style="background:#0F6F64;color:#fff">Botão teal · AA</span>
+        <span class="pair" style="background:#DF2935;color:#fff">Alerta · AA</span>
+      </div>
+    </div>
+    <div data-theme="dark" class="panel" style="background:var(--bg);color:var(--ink);border-color:var(--line)">
+      <h3 style="font-size:1.25rem;font-weight:700">Tema escuro</h3>
+      <div class="swatches" style="margin-top:var(--s4);grid-template-columns:repeat(auto-fill,minmax(110px,1fr))">
+        <div class="sw"><i style="background:#17151A"></i><div><b>bg</b><code>#17151A</code></div></div>
+        <div class="sw"><i style="background:#2B2730"></i><div><b>surface</b><code>#2B2730</code></div></div>
+        <div class="sw"><i style="background:#E8E8E8"></i><div><b>ink</b><code>#E8E8E8</code></div></div>
+        <div class="sw"><i style="background:#B9B5C2"></i><div><b>muted</b><code>#B9B5C2</code></div></div>
+        <div class="sw"><i style="background:#1B998B"></i><div><b>accent</b><code>#1B998B</code></div></div>
+        <div class="sw"><i style="background:#EE4A55"></i><div><b>alert</b><code>#EE4A55</code></div></div>
+      </div>
+      <div class="pairs">
+        <span class="pair" style="background:#17151A;color:#E8E8E8;border:1px solid #4A4552">Texto principal · AAA</span>
+        <span class="pair" style="background:#1B998B;color:#17151A">Botão teal · AA</span>
+        <span class="pair" style="background:#EE4A55;color:#17151A">Alerta · AA</span>
+      </div>
+    </div>
+  </div>
+  <p class="t-cap" style="margin-top:var(--s4)">O chumbo #656176 fica reservado a bordas e elementos decorativos; para texto, use #534D56 no claro e #B9B5C2 no escuro. Todas as variáveis ficam em <code>:root</code> e em <code>[data-theme]</code>.</p>
+</div></section>
+
+<!-- TIPOGRAFIA -->
+<section id="tipografia"><div class="wrap">
+  <div class="sec-head"><h2>Tipografia</h2>
+  <p class="lead">Outfit nos títulos, em extra-bold itálico, dá a inclinação de movimento. Plus Jakarta Sans no corpo mantém leitura limpa em telas pequenas.</p></div>
+  <div class="panel">
+    <div class="trow" style="border-top:0"><span class="tok">H1<br>Outfit 800 · 48/52<br>-0,03em</span><div class="t-h1">Alugue. Acelere.</div></div>
+    <div class="trow"><span class="tok">H2<br>Outfit 800 · 36/40</span><div class="t-h2">Escolha seu próximo carro</div></div>
+    <div class="trow"><span class="tok">H3<br>Outfit 700 · 24/29</span><div class="t-h3">Esportivos disponíveis hoje</div></div>
+    <div class="trow"><span class="tok">Subtítulo<br>Jakarta 500 · 20/28</span><div class="t-sub">Retire em minutos, devolva onde quiser.</div></div>
+    <div class="trow"><span class="tok">Eyebrow<br>Jakarta 600 · 13/16<br>+0,14em · caixa-alta</span><div class="t-eye">Frota premium</div></div>
+    <div class="trow"><span class="tok">Destaque<br>Outfit 700 · 18/25</span><div class="t-hl">Seguro completo incluso em todas as diárias</div></div>
+    <div class="trow"><span class="tok">Corpo<br>Jakarta 400 · 16/26</span><div class="t-body" style="max-width:62ch">Cada carro passa por revisão de 40 pontos antes de sair da garagem. Você escolhe o modelo, confirma as datas e recebe a chave no balcão ou por código no celular.</div></div>
+    <div class="trow"><span class="tok">Legenda<br>Jakarta 400 · 13/18</span><div class="t-cap">Preço por diária, sujeito à disponibilidade da unidade.</div></div>
+  </div>
+</div></section>
+
+<!-- TOKENS -->
+<section id="tokens"><div class="wrap">
+  <div class="sec-head"><h2>Raios, espaçamentos e breakpoints</h2>
+  <p class="lead">Escala de 4 px. Cantos curtos mantêm a sensação de estrutura; apenas selos e chips usam o formato pílula.</p></div>
+  <div class="grid2">
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0">Border radius</h3>
+      <div class="rad">
+        <div style="border-radius:var(--r-sm)">--r-sm 4</div>
+        <div style="border-radius:var(--r-md)">--r-md 8</div>
+        <div style="border-radius:var(--r-lg)">--r-lg 14</div>
+        <div style="border-radius:var(--r-pill)">--r-pill</div>
+      </div>
+      <p class="t-cap" style="margin-top:var(--s4)">Botões e inputs: 8 · Cards e painéis: 14 · Selos: 4 · Toggle e chips: pílula.</p>
+      <h3 class="sub">Breakpoints</h3>
+      <div class="bp">
+        <div><b>Mobile</b><span class="tok">até 767px<br>1 coluna · margem 24</span></div>
+        <div><b>Tablet</b><span class="tok">768–1023px<br>2 colunas</span></div>
+        <div><b>Desktop</b><span class="tok">1024px+<br>3 colunas · máx. 1120</span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3 class="sub" style="margin-top:0">Espaçamento</h3>
+      <div class="sp">
+        <div><span class="tok">--s1 · 4</span><i style="width:4px"></i></div>
+        <div><span class="tok">--s2 · 8</span><i style="width:8px"></i></div>
+        <div><span class="tok">--s3 · 12</span><i style="width:12px"></i></div>
+        <div><span class="tok">--s4 · 16</span><i style="width:16px"></i></div>
+        <div><span class="tok">--s5 · 24</span><i style="width:24px"></i></div>
+        <div><span class="tok">--s6 · 32</span><i style="width:32px"></i></div>
+        <div><span class="tok">--s7 · 48</span><i style="width:48px"></i></div>
+        <div><span class="tok">--s8 · 64</span><i style="width:64px"></i></div>
+        <div><span class="tok">--s9 · 96</span><i style="width:96px"></i></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- COMPONENTES -->
+<section id="componentes"><div class="wrap">
+  <div class="sec-head"><h2>Componentes</h2>
+  <p class="lead">Botões, card de veículo e simulador de reserva. Os botões usam inclinação de 8° como assinatura de velocidade.</p></div>
+  <div class="panel" style="margin-bottom:var(--s5)">
+    <div style="display:flex;gap:var(--s5);flex-wrap:wrap;align-items:center">
+      <a class="btn btn-primary" href="#componentes"><span>Reservar agora</span></a>
+      <a class="btn btn-alert" href="#componentes"><span>Última unidade</span></a>
+      <a class="btn btn-ghost" href="#componentes"><span>Ver detalhes</span></a>
+      <button class="btn btn-primary" disabled><span>Indisponível</span></button>
+    </div>
+  </div>
+  <div class="grid3">
+    <article class="car"><div class="pic"><span class="badge">Última unidade</span><svg viewBox="0 0 200 70"><use href="#carsil"/></svg></div>
+      <div class="body"><h3 style="font-size:1.2rem;font-weight:700">Coupé Vento GT</h3><p class="t-cap">Automático · 2 lugares · 450 cv</p><div class="price">R$ 890 <small>/ diária</small></div><a class="btn btn-primary" href="#componentes" style="margin-top:var(--s2)"><span>Reservar agora</span></a></div></article>
+    <article class="car"><div class="pic"><svg viewBox="0 0 200 70"><use href="#carsil"/></svg></div>
+      <div class="body"><h3 style="font-size:1.2rem;font-weight:700">Sedan Aço 3.0</h3><p class="t-cap">Automático · 5 lugares · híbrido</p><div class="price">R$ 420 <small>/ diária</small></div><a class="btn btn-ghost" href="#componentes" style="margin-top:var(--s2)"><span>Ver detalhes</span></a></div></article>
+    <form class="car" onsubmit="return false"><div class="body" style="padding-top:var(--s5)">
+      <h3 style="font-size:1.2rem;font-weight:700">Simule sua reserva</h3>
+      <div><label for="car">Modelo</label><select id="car"><option value="890">Coupé Vento GT</option><option value="420" selected>Sedan Aço 3.0</option></select></div>
+      <div><label for="days">Diárias: <span id="dn">3</span></label><input id="days" type="range" min="1" max="14" value="3"></div>
+      <div class="total" id="tot" aria-live="polite">R$ 1.260</div>
+      <p class="t-cap">Seguro completo incluso.</p></div></form>
+  </div>
+</div></section>
+
+<!-- NAVBAR -->
+<section id="navbar"><div class="wrap">
+  <div class="sec-head"><h2>Navbar nos dois temas</h2>
+  <p class="lead">O mesmo componente renderizado lado a lado. Clique no botão do topo da página para ver a transição ao vivo; o knob gira e as variáveis de cor mudam em 350 ms.</p></div>
+  <div class="cmp">
+    <div class="mini" data-theme="light">
+      <div class="bar"><span class="brand"><svg viewBox="0 0 64 64" style="width:28px;height:28px"><use href="#mark"/></svg><span class="word" style="font-size:1.1rem">TORQ<b>RENT</b></span></span>
+        <span class="links"><a>Frota</a><a>Preços</a><a>Ajuda</a></span>
+        <span class="toggle" style="margin-left:auto"><span class="knob"><svg class="sun"><use href="#i-sun"/></svg></span>Claro</span></div>
+      <div class="cap">Tema claro · fundo #E8E8E8, texto #2A2630</div>
+    </div>
+    <div class="mini" data-theme="dark">
+      <div class="bar"><span class="brand"><svg viewBox="0 0 64 64" style="width:28px;height:28px"><use href="#mark"/></svg><span class="word" style="font-size:1.1rem">TORQ<b>RENT</b></span></span>
+        <span class="links"><a>Frota</a><a>Preços</a><a>Ajuda</a></span>
+        <span class="toggle" style="margin-left:auto"><span class="knob"><svg class="moon"><use href="#i-moon"/></svg></span>Escuro</span></div>
+      <div class="cap">Tema escuro · fundo #17151A, texto #E8E8E8</div>
+    </div>
+  </div>
+</div></section>
+</main>
+<footer><div class="wrap">Torq Rent · Design System v1.0. Tokens em CSS puro, sem dependências além das fontes.</div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeToggle'), lab=document.getElementById('themeLabel');
+  function apply(t){root.setAttribute('data-theme',t);btn.setAttribute('aria-pressed',t==='dark');lab.textContent=t==='dark'?'Escuro':'Claro';}
+  var saved=null;try{saved=localStorage.getItem('torq-theme');}catch(e){}
+  var start=saved||(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  apply(start);
+  btn.addEventListener('click',function(){
+    var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    apply(next);try{localStorage.setItem('torq-theme',next);}catch(e){}
+  });
+  var car=document.getElementById('car'),days=document.getElementById('days'),dn=document.getElementById('dn'),tot=document.getElementById('tot');
+  function calc(){dn.textContent=days.value;tot.textContent='R$ '+(car.value*days.value).toLocaleString('pt-BR');}
+  car.addEventListener('change',calc);days.addEventListener('input',calc);
+})();
+</script>
+</body>
+</html>
