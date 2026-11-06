@@ -1,0 +1,15 @@
+{
+  "usuarios": [
+    { "id": 1, "tipo": "cliente", "nome": "Maria Souza", "email": "cliente@torq.com", "senha": "123", "rg": "MG-12.345.678", "cpf": "12345678901", "endereco": "Rua das Acácias, 120, Belo Horizonte", "profissao": "Engenheira", "empregadores": [{ "nome": "Construtora Alfa", "rendimento": 9500 }, { "nome": "Consultoria Beta", "rendimento": 2500 }] },
+    { "id": 2, "tipo": "agente", "agenteTipo": "empresa", "nome": "Torq Rent Locadora", "email": "empresa@torq.com", "senha": "123" },
+    { "id": 3, "tipo": "agente", "agenteTipo": "banco", "nome": "Banco Vértice", "email": "banco@torq.com", "senha": "123" }
+  ],
+  "automoveis": [
+    { "id": 1, "matricula": "MAT-1001", "ano": 2024, "marca": "Torq", "modelo": "Vento GT", "placa": "ABC1D23", "proprietario": "empresa" },
+    { "id": 2, "matricula": "MAT-1002", "ano": 2023, "marca": "Torq", "modelo": "Aço 3.0", "placa": "BRA2E19", "proprietario": "empresa" },
+    { "id": 3, "matricula": "MAT-1003", "ano": 2025, "marca": "Aurora", "modelo": "Trilha SUV", "placa": "QWE4R56", "proprietario": "banco" }
+  ],
+  "pedidos": [
+    { "id": 1, "usuarioId": 1, "automovelId": 2, "dataInicio": "2026-11-20", "dataFim": "2026-11-27", "propriedade": "empresa", "bancoId": null, "status": "Em análise", "parecer": "" }
+  ]
+}

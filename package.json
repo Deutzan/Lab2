@@ -1,0 +1,7 @@
+{
+  "name": "torq-rent",
+  "version": "1.0.0",
+  "description": "Sistema de aluguel de carros: HTML, CSS, JS, Bootstrap 5 e JSON Server",
+  "scripts": { "start": "json-server --watch db.json --port 3000 --static public" },
+  "devDependencies": { "json-server": "0.17.4" }
+}
