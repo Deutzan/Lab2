@@ -49,16 +49,16 @@ Locadoras costumam atender pedidos por telefone e balcão, o que dificulta acomp
   - O aluguel pode estar associado a um **contrato de crédito** concedido por um banco agente.
 ---
  
-## ✨ Funcionalidades Principais
+## Funcionalidades Principais
  
-- 🔐 **Cadastro e login:** contas de cliente e de agente (empresa ou banco).
-- 🧾 **Pedidos (cliente):** criar, modificar (enquanto "Em análise"), consultar o status e cancelar.
-- 🏦 **Análise financeira (agente):** vê a renda total do cliente e registra parecer positivo ou negativo com justificativa.
-- ✍️ **Execução de contrato:** pedidos aprovados viram contrato e o automóvel passa a constar com a propriedade definida.
-- 💳 **Crédito:** associação opcional do pedido a um banco.
-- 👤 **CRUD de cliente:** cadastro, edição e exclusão (pelo próprio cliente ou por agentes).
-- 🚗 **Frota:** agentes cadastram e excluem automóveis.
-- 🌗 **Tema claro e escuro:** alternância na barra de navegação, com a preferência salva no navegador.
+- **Cadastro e login:** contas de cliente e de agente (empresa ou banco).
+- **Pedidos (cliente):** criar, modificar (enquanto "Em análise"), consultar o status e cancelar.
+- **Análise financeira (agente):** vê a renda total do cliente e registra parecer positivo ou negativo com justificativa.
+- **Execução de contrato:** pedidos aprovados viram contrato e o automóvel passa a constar com a propriedade definida.
+- **Crédito:** associação opcional do pedido a um banco.
+- **CRUD de cliente:** cadastro, edição e exclusão (pelo próprio cliente ou por agentes).
+- **Frota:** agentes cadastram e excluem automóveis.
+-  **Tema claro e escuro:** alternância na barra de navegação, com a preferência salva no navegador.
 **Fluxo de status do pedido**
  
 ```mermaid
@@ -78,12 +78,12 @@ stateDiagram-v2
  
 ## 🛠 Tecnologias Utilizadas
  
-### 💻 Front-end
+### Front-end
  
 - **Estrutura e lógica:** HTML5, CSS3 e JavaScript (ES6+), sem framework.
 - **Interface:** [Bootstrap 5.3](https://getbootstrap.com/) (via CDN), personalizado com as cores e a tipografia (Outfit) da marca.
 - **Consumo da API:** Fetch API.
-### 🖥️ Back-end (simulado)
+### Back-end (simulado)
  
 - **API REST e persistência:** [JSON Server 0.17.4](https://github.com/typicode/json-server), a partir do arquivo `db.json`.
 - **Runtime:** Node.js v18 ou superior.
@@ -92,7 +92,7 @@ stateDiagram-v2
  
 ---
  
-## 🏗 Arquitetura
+## Arquitetura
  
 O sistema se divide em dois subsistemas, como pede o enunciado, dentro de uma arquitetura cliente-servidor: o navegador (clientes e agentes) fala com o servidor central, que expõe a API REST.
  
@@ -208,11 +208,11 @@ Para voltar aos dados iniciais, restaure o `db.json` com `git checkout db.json`.
  
 ## Documentações utilizadas
  
-- 📖 [Bootstrap 5.3](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
-- 📖 [JSON Server](https://github.com/typicode/json-server/tree/v0.17.4)
-- 📖 [Fetch API (MDN)](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API)
-- 📖 [Mermaid (diagramas em Markdown)](https://mermaid.js.org/)
-- 📖 [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/)
+-  [Bootstrap 5.3](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+-  [JSON Server](https://github.com/typicode/json-server/tree/v0.17.4)
+-  [Fetch API (MDN)](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API)
+-  [Mermaid (diagramas em Markdown)](https://mermaid.js.org/)
+-  [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/)
 ---
  
 ## Autor
