@@ -179,7 +179,7 @@ classDiagram
 **Pré-requisitos:** Node.js v18 ou superior (o npm já vem junto).
  
 ```bash
-git clone <URL_DO_SEU_REPOSITORIO>
+git clone <https://github.com/Deutzan/Lab2.git>
 cd torq-rent
 npm install
 npm start
