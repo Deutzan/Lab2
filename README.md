@@ -1,16 +1,14 @@
-<h1 align="center"> Torq Rent </h1>
+# - Torq Rent - 
  
-<p align="center">
-  <img src="docs/logo.svg" alt="Logo da Torq Rent: escudo hexagonal com duas lâminas inclinadas em teal e vermelho" width="140">
-</p>
-> [!NOTE]
-> Sistema web para gestão de aluguéis de automóveis: clientes fazem, modificam, consultam e cancelam pedidos pela Internet, e agentes (empresas e bancos) avaliam o lado financeiro e executam o contrato.
+![Logo da Torq Rent: escudo hexagonal com duas lâminas inclinadas em teal e vermelho](docs/logo.svg)
+ 
+> **Sistema web para gestão de aluguéis de automóveis:** clientes fazem, modificam, consultam e cancelam pedidos pela Internet, e agentes (empresas e bancos) avaliam o lado financeiro e executam o contrato.
 >
 > **Logo:** um escudo hexagonal robusto (solidez) cortado por duas lâminas inclinadas para frente (velocidade), em teal `#1B998B` e vermelho `#DF2935`.
  
 ---
  
-## 🚧 Status do Projeto
+## Status do Projeto
  
 ![Versão](https://img.shields.io/badge/Vers%C3%A3o-v1.0.0-blue)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
@@ -25,17 +23,16 @@
  
 ## Caminhamento
  
-- [Sobre o Projeto](#-sobre-o-projeto)
-- [Funcionalidades Principais](#-funcionalidades-principais)
-- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-- [Arquitetura](#-arquitetura)
-- [Modelos vs. Código](#-modelos-vs-código)
-- [Documentações utilizadas](#-documentações-utilizadas)
-- [Autor](#-autor)
-
+- [Sobre o Projeto](#sobre-o-projeto)
+- [Funcionalidades Principais](#funcionalidades-principais)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Arquitetura](#arquitetura)
+- [Como Executar a Aplicação](#como-executar-a-aplicação)
+- [Documentações utilizadas](#documentações-utilizadas)
+- [Autor](#autor)
 ---
  
-## 📝 Sobre o Projeto
+## Sobre o Projeto
  
 Locadoras costumam atender pedidos por telefone e balcão, o que dificulta acompanhar o status de cada pedido e a análise de crédito. A **Torq Rent** centraliza esse fluxo na web.
  
@@ -58,7 +55,7 @@ Locadoras costumam atender pedidos por telefone e balcão, o que dificulta acomp
 - **Crédito:** associação opcional do pedido a um banco.
 - **CRUD de cliente:** cadastro, edição e exclusão (pelo próprio cliente ou por agentes).
 - **Frota:** agentes cadastram e excluem automóveis.
--  **Tema claro e escuro:** alternância na barra de navegação, com a preferência salva no navegador.
+- **Tema claro e escuro:** alternância na barra de navegação, com a preferência salva no navegador.
 **Fluxo de status do pedido**
  
 ```mermaid
@@ -67,7 +64,7 @@ stateDiagram-v2
     EmAnalise --> Aprovado: Parecer positivo
     EmAnalise --> Reprovado: Parecer negativo
     Aprovado --> ContratoExecutado: Agente executa contrato
-    EmAnalise --> Cancelado: Cliente cancela    
+    EmAnalise --> Cancelado: Cliente cancela
     Aprovado --> Cancelado: Cliente cancela
     ContratoExecutado --> [*]
     Reprovado --> [*]
@@ -76,7 +73,7 @@ stateDiagram-v2
  
 ---
  
-## 🛠 Tecnologias Utilizadas
+## Tecnologias Utilizadas
  
 ### Front-end
  
@@ -87,8 +84,7 @@ stateDiagram-v2
  
 - **API REST e persistência:** [JSON Server 0.17.4](https://github.com/typicode/json-server), a partir do arquivo `db.json`.
 - **Runtime:** Node.js v18 ou superior.
-> [!NOTE]
-> Não há banco de dados real, autenticação com token nem containers. A senha fica em texto puro no `db.json` porque o objetivo é simular o servidor.
+> **Nota:** não há banco de dados real, autenticação com token nem containers. A senha fica em texto puro no `db.json` porque o objetivo é simular o servidor.
  
 ---
  
@@ -178,9 +174,16 @@ classDiagram
  
 > No `db.json`, `Cliente` e `Agente` ficam na coleção `usuarios`, diferenciados pelo campo `tipo`. `Empregador` é um array embutido no cliente.
  
-### Como Executar a Aplicação
+---
+ 
+## Como Executar a Aplicação
+ 
+**Pré-requisitos:** Node.js v18 ou superior (o npm já vem junto).
  
 ```bash
+git clone <URL_DO_SEU_REPOSITORIO>
+cd torq-rent
+npm install
 npm start
 ```
  
@@ -208,17 +211,17 @@ Para voltar aos dados iniciais, restaure o `db.json` com `git checkout db.json`.
  
 ## Documentações utilizadas
  
--  [Bootstrap 5.3](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
--  [JSON Server](https://github.com/typicode/json-server/tree/v0.17.4)
--  [Fetch API (MDN)](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API)
--  [Mermaid (diagramas em Markdown)](https://mermaid.js.org/)
--  [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/)
+- [Bootstrap 5.3](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+- [JSON Server](https://github.com/typicode/json-server/tree/v0.17.4)
+- [Fetch API (MDN)](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API)
+- [Mermaid (diagramas em Markdown)](https://mermaid.js.org/)
+- [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/)
 ---
  
 ## Autor
  
 | Nome | GitHub | LinkedIn | E-mail |
 |:--|:--|:--|:--|
-| Luis Felipe Dias de Almeida | [@lacostado](https://github.com/Deutzan) | [perfil](https://www.linkedin.com/in/lu%C3%ADs-felipe-dias-3634a1388) | luisdias29agosto@gmail.com |
+| Luis Felipe Dias de Almeida | [@Deutzan](https://github.com/Deutzan) | [perfil](https://www.linkedin.com/in/lu%C3%ADs-felipe-dias-3634a1388) | luisdias29agosto@gmail.com |
  
 ---
