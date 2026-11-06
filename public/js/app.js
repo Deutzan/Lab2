@@ -35,7 +35,7 @@ function renderNav() {
     <a class="navbar-brand d-flex align-items-center gap-2" href="#pedidos">${logo}<span class="brand-word">TORQ<span class="text-primary">RENT</span></span></a>
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nv" aria-label="Menu"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="nv"><ul class="navbar-nav me-auto">${user ? `<li>${link('#pedidos', 'Pedidos')}</li>` +
-      (isAg() ? `<li>${link('#clientes', 'Clientes')}</li><li>${link('#frota', 'Frota')}</li>` : '') + `<li>${link('#perfil', 'Meu perfil')}</li>` : ''}</ul>
+      (isAg() ? `<li>${link('#clientes', 'Clientes')}</li><li>${link('#frota', 'Frota')}</li>` : '') + `<li>${link('#perfil', 'Meu perfil')}</li>` : ''}<li><a class="nav-link" href="design-system.html">Design System</a></li></ul>
       <div class="d-flex align-items-center gap-2">
         <button class="btn btn-outline-secondary btn-sm" onclick="toggleTheme()" aria-pressed="${dark}">${dark ? 'Tema escuro' : 'Tema claro'}</button>
         ${user ? `<span class="small text-body-secondary">${esc(user.nome)}</span><button class="btn btn-sm btn-primary" onclick="logout()">Sair</button>` : ''}
