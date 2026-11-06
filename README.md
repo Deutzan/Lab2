@@ -1,7 +1,5 @@
 # - Torq Rent - 
  
-![Logo da Torq Rent: escudo hexagonal com duas lâminas inclinadas em teal e vermelho](docs/logo.svg)
- 
 > **Sistema web para gestão de aluguéis de automóveis:** clientes fazem, modificam, consultam e cancelam pedidos pela Internet, e agentes (empresas e bancos) avaliam o lado financeiro e executam o contrato.
 >
 > **Logo:** um escudo hexagonal robusto (solidez) cortado por duas lâminas inclinadas para frente (velocidade), em teal `#1B998B` e vermelho `#DF2935`.
