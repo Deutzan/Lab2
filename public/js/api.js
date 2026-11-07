@@ -1,5 +1,5 @@
 // Camada de acesso à API REST (JSON Server) via Fetch
-const BASE = location.protocol === 'file:' ? 'http://localhost:3000' : '';
+const BASE = location.port === '3000' ? '' : 'http://localhost:3000'; // o JSON Server roda na porta 3000
 const chk = r => { if (!r.ok) throw new Error('Falha na API (' + r.status + '). O JSON Server está rodando?'); return r.json(); };
 const send = (m, p, b) => fetch(BASE + p, { method: m, headers: { 'Content-Type': 'application/json' }, body: b ? JSON.stringify(b) : undefined }).then(chk);
 const api = {
